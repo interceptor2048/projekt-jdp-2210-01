@@ -2,8 +2,10 @@ package com.kodilla.ecommercee;
 
 import com.kodilla.ecommercee.domain.dto.OrderDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,25 +15,26 @@ import java.util.List;
 public class OrderController {
 
     @GetMapping
-    public List<OrderDto> getOrders() {
-        return new ArrayList<>();
+    public ResponseEntity<List<OrderDto>> getOrders() {
+        return ResponseEntity.ok(new ArrayList<>());
     }
 
     @GetMapping(value = "{orderId}")
-    public OrderDto getOrder(Long orderId) {
-        return new OrderDto();
+    public ResponseEntity<OrderDto> getOrder(@PathVariable Long orderId) {
+        return ResponseEntity.ok(new OrderDto(1L,1L, 1L, LocalDate.now(),false,false));
     }
 
     @DeleteMapping(value = "{orderId}")
-    public void deleteOrder(Long orderId) {
-
+    public ResponseEntity<Void> deleteOrder(@PathVariable Long orderId) {
+        return ResponseEntity.ok().build();
     }
-    @PostMapping(value = "{orderId}")
-    public OrderDto updateOrder(Long orderId) {
-        return new OrderDto();
+    @PutMapping(value = "{orderId}")
+    public ResponseEntity<OrderDto> updateOrder(@RequestBody OrderDto orderDto) {
+        return ResponseEntity.ok((new OrderDto(1L, 1L, 1L, LocalDate.now(), true, false)));
     }
-    @PutMapping
-    public void createOrder(OrderDto orderDto){
+    @PostMapping
+    public ResponseEntity<Void> createOrder(@RequestBody OrderDto orderDto){
+        return ResponseEntity.ok().build();
 
     }
 
