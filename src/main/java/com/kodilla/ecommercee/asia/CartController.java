@@ -36,8 +36,8 @@ public class CartController {
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<OrderDto> createOrderFromCart(@RequestBody CartDto cartDto){
+    @PostMapping(value = "/create_order")
+    public ResponseEntity<OrderDto> createOrderFromCart(@RequestParam Long cartId){
         return ResponseEntity.ok(new OrderDto(1L, 1L, 1L, LocalDate.now(), true, false));
     }
 }
