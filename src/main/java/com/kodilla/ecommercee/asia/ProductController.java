@@ -19,7 +19,6 @@ public class ProductController {
         return ResponseEntity.ok(new ProductDto(1L, "book", "thriller", 30.2, 2L));
     }
 
-
     @GetMapping
     public ResponseEntity<List<ProductDto>> getAllProducts(){
         return ResponseEntity.ok(new ArrayList<>());
@@ -36,7 +35,7 @@ public class ProductController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> addProduct(@RequestBody ProductDto productDto){
+    public ResponseEntity<Void> createNewProduct(@RequestBody ProductDto productDto){
         return ResponseEntity.ok().build();
     }
 }
