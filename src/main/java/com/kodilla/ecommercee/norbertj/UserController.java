@@ -14,11 +14,11 @@ public class UserController {
     @PostMapping("/create_user")
     public ResponseEntity<UserDto> createUser(@RequestParam String firstName, @RequestParam String lastName, @RequestParam String address,
                                               @RequestParam String email, @RequestParam String login, @RequestParam String password){
-        return ResponseEntity.ok(new UserDto(1,login,1,666));
+        return ResponseEntity.ok(new UserDto(1L,login,1,666));
     }
 
     @PutMapping("/block_user")
-    public ResponseEntity<String> blockUserById(@RequestParam int id){
+    public ResponseEntity<String> blockUserById(@RequestParam Long id){
         return ResponseEntity.ok("User with requested ID was blocked");
     }
 
