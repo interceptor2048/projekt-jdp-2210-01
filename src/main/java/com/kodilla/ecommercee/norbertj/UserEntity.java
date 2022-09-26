@@ -1,11 +1,13 @@
 package com.kodilla.ecommercee.norbertj;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -34,9 +36,6 @@ public class UserEntity {
 
     @Column(name="user_password")
     private String password;
-    //added based on spec.json
-    @Column(name="user_status")
-    private int status;
 
     @Column(name="user_account_creation_date")
     private LocalDate creationDate;
@@ -44,9 +43,13 @@ public class UserEntity {
     @Column(name="user_current_key")
     private Long key;
 
-  //  commented out so the class compile without reference class
-  //  @OneToMany(mappedBy = "userId")
-  //  @JsonManagedReference
-  //  private List<OrderEntity> orders;
+    //added based on spec.json
+    @Column(name="user_status")
+    private int status;
+
+      //commented out so the class compile without reference class
+      @OneToMany(mappedBy = "userId")
+      @JsonManagedReference
+      private List<OrderEntity> orders;
 
 }
