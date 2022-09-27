@@ -1,6 +1,7 @@
-package com.kodilla.ecommercee.norbertj;
+package com.kodilla.ecommercee.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.kodilla.ecommercee.domain.entity.OrderEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

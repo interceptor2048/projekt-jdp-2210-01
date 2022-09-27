@@ -1,4 +1,4 @@
-package com.kodilla.ecommercee.norbertj;
+package com.kodilla.ecommercee.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
