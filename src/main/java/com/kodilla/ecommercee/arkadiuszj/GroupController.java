@@ -14,23 +14,23 @@ import java.util.List;
 @RequiredArgsConstructor
 public class GroupController {
 
-@GetMapping
+    @GetMapping
     public ResponseEntity<List<ProductGroupDto>> getProductGroups() {
-    return ResponseEntity.ok(new ArrayList<>());
-}
+        return ResponseEntity.ok(new ArrayList<>());
+    }
 
-@PostMapping
-public ResponseEntity<Void> addProductGroup(@RequestParam String groupName) {
-    return ResponseEntity.ok(null);
-}
-
-@GetMapping(value = "/{groupId}")
+    @GetMapping(value = "/{groupId}")
     public ResponseEntity<ProductGroupDto> getProductGroup(@PathVariable Long groupId) {
-    return ResponseEntity.ok(new ProductGroupDto(0L, "Ubrania"));
-}
+        return ResponseEntity.ok(new ProductGroupDto(0L, "Ubrania"));
+    }
 
-@PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Void> addProductGroup(@RequestBody ProductGroupDto productGroupDto) {
+        return ResponseEntity.ok().build();
+    }
+
+    @PutMapping
     public ResponseEntity<ProductGroupDto> updateProductGroup(@RequestBody ProductGroupDto productGroupDto) {
-    return ResponseEntity.ok().build();
-}
+        return ResponseEntity.ok().build();
+    }
 }
