@@ -1,7 +1,6 @@
-package com.kodilla.ecommercee.arkadiuszj;
+package com.kodilla.ecommercee.domain.entity;
 
 import com.kodilla.ecommercee.asia.Product;
-import com.kodilla.ecommercee.norbertj.OrderEntity;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -16,11 +15,11 @@ public class CartEntity {
     @Column(name = "cart_id")
     private Long id;
 
-    @OneToOne(mappedBy = "order_cart_id")
-    private OrderEntity orderEntity;
+    @OneToOne(mappedBy = "cartId")
+    private OrderEntity orderId;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "products_in_cart_id")
-    private List<Product> productsInCartId;
+//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "products_in_cart_id")
+//    private List<Product> productsInCartId;
 
     @Column(name = "cart_creation_date")
     private LocalDate creationDate;

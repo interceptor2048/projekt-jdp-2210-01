@@ -19,10 +19,9 @@ public class OrderEntity {
     @Column(name="order_id")
     private Long id;
 
-//    @OneToOne
-//    @JoinColumn(name= "cart_id")
-//    @Column(name="order_cart_id")
-//    private CartEntity cartId;
+    @OneToOne
+    @JoinColumn(name= "order_cart_id", referencedColumnName = "cart_id")
+    private CartEntity cartId;
 
     @ManyToOne
     @JoinColumn(name = "order_user_id", referencedColumnName = "user_id")

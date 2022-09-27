@@ -1,5 +1,6 @@
-package com.kodilla.ecommercee.arkadiuszj;
+package com.kodilla.ecommercee.controller;
 
+import com.kodilla.ecommercee.domain.dto.ProductGroupDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
