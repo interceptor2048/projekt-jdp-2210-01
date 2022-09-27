@@ -24,13 +24,13 @@ public ResponseEntity<Void> addProductGroup(@RequestParam String groupName) {
     return ResponseEntity.ok(null);
 }
 
-@GetMapping(value = "{grupId}")
-    public ResponseEntity<ProductGroupDto> getProductGroup(@RequestParam Long groupId) {
+@GetMapping(value = "/{groupId}")
+    public ResponseEntity<ProductGroupDto> getProductGroup(@PathVariable Long groupId) {
     return ResponseEntity.ok(new ProductGroupDto(0L, "Ubrania"));
 }
 
 @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ProductGroupDto> updateProductGroup(@RequestParam ProductGroupDto productGroupDto) {
+    public ResponseEntity<ProductGroupDto> updateProductGroup(@RequestBody ProductGroupDto productGroupDto) {
     return ResponseEntity.ok().build();
 }
 }
