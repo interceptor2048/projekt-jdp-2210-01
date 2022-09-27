@@ -1,5 +1,6 @@
-package com.kodilla.ecommercee.norbertj;
+package com.kodilla.ecommercee.controller;
 
+import com.kodilla.ecommercee.domain.dto.ProductsInCartDto;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
