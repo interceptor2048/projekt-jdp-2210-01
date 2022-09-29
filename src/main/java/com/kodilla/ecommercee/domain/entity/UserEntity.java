@@ -13,7 +13,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-@Builder
 @Entity(name = "users")
 public class UserEntity {
     @Id
