@@ -29,13 +29,13 @@ public class ProductEntity {
     @Column(name = "product_price")
     private Double price;
 
-  //  @ManyToOne
-  //  @JoinColumn(name = "product_group_id", referencedColumnName = "product_group_id")
-//    @JsonBackReference
-//    private ProductGroupEntity productGroupId;
+    @ManyToOne
+    @JoinColumn(name = "product_group_id", referencedColumnName = "product_group_id")
+    @JsonBackReference
+    private ProductGroupEntity productGroupId;
 
- //   @OneToMany(mappedBy = "productId")
- //   @JsonManagedReference
- //   private List<ProductsInCartEntity> productsInCart;
+    @OneToMany(mappedBy = "productId")
+    @JsonManagedReference
+    private List<ProductsInCartEntity> productsInCart;
 
 }

@@ -47,7 +47,6 @@ public class UserEntity {
     @Column(name="user_status")
     private int status;
 
-      //commented out so the class compile without reference class
       @OneToMany(mappedBy = "userId")
       @JsonManagedReference
       private List<OrderEntity> orders;
