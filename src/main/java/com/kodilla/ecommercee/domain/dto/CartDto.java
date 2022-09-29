@@ -1,6 +1,7 @@
-package com.kodilla.ecommercee.asia;
+package com.kodilla.ecommercee.domain.dto;
 
-import javax.xml.crypto.Data;
+import com.kodilla.ecommercee.domain.dto.ProductDto;
+
 import java.util.List;
 
 public class CartDto {

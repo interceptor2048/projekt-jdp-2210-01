@@ -1,11 +1,9 @@
 package com.kodilla.ecommercee.domain.entity;
 
-import com.kodilla.ecommercee.asia.Product;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.List;
 
 @Data
 @Entity
