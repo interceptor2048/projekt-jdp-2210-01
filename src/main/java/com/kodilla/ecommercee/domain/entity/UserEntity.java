@@ -2,6 +2,7 @@ package com.kodilla.ecommercee.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -12,6 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
+@Builder
 @Entity(name = "users")
 public class UserEntity {
     @Id
@@ -47,7 +49,6 @@ public class UserEntity {
     @Column(name="user_status")
     private int status;
 
-      //commented out so the class compile without reference class
       @OneToMany(mappedBy = "userId")
       @JsonManagedReference
       private List<OrderEntity> orders;

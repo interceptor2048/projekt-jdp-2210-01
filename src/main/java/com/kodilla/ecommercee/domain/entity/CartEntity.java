@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @Entity
@@ -16,8 +17,8 @@ public class CartEntity {
     @OneToOne(mappedBy = "cartId")
     private OrderEntity orderId;
 
-//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "products_in_cart_id")
-//    private List<Product> productsInCartId;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "cartId")
+    private List<ProductsInCartEntity> productsInCartId;
 
     @Column(name = "cart_creation_date")
     private LocalDate creationDate;

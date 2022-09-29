@@ -4,10 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,13 +17,13 @@ public class ProductsInCartEntity {
     @Column(name = "product_in_cart_id")
     private Long id;
 
-//    @ManyToOne
-//    @JoinColumn(name = "products_in_cart_cart_id", referencedColumnName = "cart_id")
-//    private CartEntity CartId;
+    @ManyToOne
+    @JoinColumn(name = "products_in_cart_cart_id", referencedColumnName = "cart_id")
+    private CartEntity cartId;
 
-//    @ManyToOne
-//    @JoinColumn(name = "product_in_cart_product_id", referencedColumnName = "product_id")
-//    private Product ProductId;
+    @ManyToOne
+    @JoinColumn(name = "product_in_cart_product_id", referencedColumnName = "product_id")
+    private ProductEntity productId;
 
     @Column(name="product_in_cart_product_price")
     private double productPrice;
