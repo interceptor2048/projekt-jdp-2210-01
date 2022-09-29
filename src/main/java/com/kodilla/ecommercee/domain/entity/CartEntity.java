@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Data
-@Entity
+@Entity(name = "carts")
 public class CartEntity {
     @Id
     @GeneratedValue

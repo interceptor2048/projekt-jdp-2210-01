@@ -1,7 +1,6 @@
 package com.kodilla.ecommercee.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.kodilla.ecommercee.domain.entity.UserEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
