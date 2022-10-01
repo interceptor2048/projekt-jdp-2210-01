@@ -1,12 +1,17 @@
 package com.kodilla.ecommercee.domain.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
-@Entity
+@Entity(name = "carts")
 public class CartEntity {
     @Id
     @GeneratedValue
@@ -16,8 +21,8 @@ public class CartEntity {
     @OneToOne(mappedBy = "cartId")
     private OrderEntity orderId;
 
-//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "products_in_cart_id")
-//    private List<Product> productsInCartId;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "cartId")
+    private List<ProductsInCartEntity> productsInCartId;
 
     @Column(name = "cart_creation_date")
     private LocalDate creationDate;
