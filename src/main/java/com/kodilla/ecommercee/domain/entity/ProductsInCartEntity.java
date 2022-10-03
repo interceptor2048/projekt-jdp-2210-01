@@ -1,14 +1,14 @@
 package com.kodilla.ecommercee.domain.entity;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
+@Data
 @Entity(name = "products_in_carts")
 public class ProductsInCartEntity {
 
