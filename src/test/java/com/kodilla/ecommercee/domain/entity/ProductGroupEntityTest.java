@@ -8,8 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 public class ProductGroupEntityTest {
@@ -57,4 +56,20 @@ public class ProductGroupEntityTest {
         //CleanUp
         repository.deleteByGroupName(groupName);
     }
+
+    @Test
+    void testProductGroupEntityDelete() {
+        //Given
+        ProductGroupEntity productGroup = new ProductGroupEntity("name", "type");
+        repository.save(productGroup);
+
+        //When
+        Long id = productGroup.getId();
+        repository.deleteById(id);
+
+        //Then
+        Optional<ProductGroupEntity> group = repository.findById(id);
+        assertFalse(group.isPresent());
+    }
+
 }
