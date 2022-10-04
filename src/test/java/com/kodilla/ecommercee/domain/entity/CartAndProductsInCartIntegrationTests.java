@@ -41,6 +41,29 @@ public class CartAndProductsInCartIntegrationTests {
         cartEntityRepository.deleteAll();
     }
     @Test
+    void updateProductsInCart(){
+        //given
+        CartEntity cartEntity = new CartEntity(null,null,new ArrayList<>(), LocalDate.now(),LocalDate.now(),null,666);
+        cartEntityRepository.save(cartEntity);
+        ProductsInCartEntity productsInCartEntity=new ProductsInCartEntity(null,cartEntity,null,20.00,10,200,LocalDate.now());
+        productsInCartRepository.save(productsInCartEntity);
+        ProductsInCartEntity productsInCartEntity2=new ProductsInCartEntity(null,cartEntity,null,20.00,20,400,LocalDate.now());
+        productsInCartRepository.save(productsInCartEntity2);
+        //when
+        List<ProductsInCartEntity> products=  productsInCartRepository.findAllByCartId(cartEntity);
+        productsInCartEntity2=products.get(1);
+        productsInCartEntity2.setProductSumValue(410);
+        productsInCartRepository.save(productsInCartEntity2);
+        products=  productsInCartRepository.findAllByCartId(cartEntity);
+        //then
+        assertEquals(products.size(),2);
+        assertEquals(products.get(1).getProductSumValue(),410);
+        //cleanup
+        productsInCartRepository.deleteAll();
+        cartEntityRepository.deleteAll();
+    }
+
+    @Test
     void deleteProductsToNewCartTest() {
         //given
         CartEntity cartEntity = new CartEntity(null,null,new ArrayList<>(), LocalDate.now(),LocalDate.now(),null,666);
