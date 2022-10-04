@@ -2,6 +2,7 @@ package com.kodilla.ecommercee.domain.entity;
 
 
 import com.kodilla.ecommercee.repository.CartEntityRepository;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -52,6 +53,28 @@ public class CartEntityTest {
     }
 
     @Test
+    void testUpdateCart() {
+        //Given
+        CartEntity cartEntity = new CartEntity(null,null,null,LocalDate.now(),LocalDate.now(),null,666);
+        cartEntityRepository.save(cartEntity);
+        //When
+        Long id = cartEntity.getId();
+        Optional<CartEntity> readCart = cartEntityRepository.findById(id);
+        cartEntity=readCart.get();
+        cartEntity.setSumValue(1000);
+        cartEntityRepository.save(cartEntity);
+        //Then
+        id = cartEntity.getId();
+        readCart = cartEntityRepository.findById(id);
+        assertTrue(readCart.isPresent());
+        assertEquals( readCart.get().getSumValue(),1000);
+        //CleanUp
+        cartEntityRepository.deleteById(id);
+    }
+
+
+
+    @Test
     //internal array tests
     void testAddProductToEmptyCart() {
         //Given
@@ -74,7 +97,5 @@ public class CartEntityTest {
         //CleanUp
         cartEntityRepository.deleteById(cartID);
     }
-
-
 
 }
