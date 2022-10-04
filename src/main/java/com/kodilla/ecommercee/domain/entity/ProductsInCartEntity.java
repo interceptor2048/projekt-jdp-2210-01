@@ -1,10 +1,12 @@
 package com.kodilla.ecommercee.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -35,6 +37,6 @@ public class ProductsInCartEntity {
     private double productSumValue;
 
     @Column(name="product_in_cart_date_added")
-    private double productDateAdded;
+    private LocalDate productDateAdded;
 
 }
