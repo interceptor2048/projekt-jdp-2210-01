@@ -1,6 +1,7 @@
 package com.kodilla.ecommercee.domain.entity;
 
 import com.kodilla.ecommercee.repository.ProductGroupEntityRepository;
+import com.kodilla.ecommercee.repository.ProductRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,7 +15,10 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ProductGroupEntityTest {
 
     @Autowired
-    private ProductGroupEntityRepository repository;
+    private ProductGroupEntityRepository productGroupRepository;
+
+    @Autowired
+    private ProductRepository productRepository;
 
     private static final String GROUP_NAME = "Test: name";
     private static final String GROUP_TYPE = "Test: type";
@@ -25,15 +29,15 @@ public class ProductGroupEntityTest {
         ProductGroupEntity productGroup = new ProductGroupEntity(GROUP_NAME, GROUP_TYPE);
 
         //Wehn
-        repository.save(productGroup);
+        productGroupRepository.save(productGroup);
 
         //Then
         Long id = productGroup.getId();
-        Optional<ProductGroupEntity> group = repository.findById(id);
+        Optional<ProductGroupEntity> group = productGroupRepository.findById(id);
         assertTrue(group.isPresent());
 
         //CleanUp
-        repository.deleteById(id);
+        productGroupRepository.deleteById(id);
     }
 
     @Test
@@ -42,34 +46,65 @@ public class ProductGroupEntityTest {
         ProductGroupEntity productGroup = null;//new ProductGroupEntity(GROUP_NAME, GROUP_TYPE);
         for(int i = 0; i < 3; i++) {
             productGroup = new ProductGroupEntity(GROUP_NAME, GROUP_TYPE);
-            repository.save(productGroup);
+            productGroupRepository.save(productGroup);
         }
 
         String groupName = productGroup.getGroupName();
 
         //When
-        List<ProductGroupEntity> readProductsGroup = repository.findByGroupName(groupName);
+        List<ProductGroupEntity> readProductsGroup = productGroupRepository.findByGroupName(groupName);
 
         //Then
         assertEquals(3, readProductsGroup.size());
 
         //CleanUp
-        repository.deleteByGroupName(groupName);
+        productGroupRepository.deleteByGroupName(groupName);
     }
 
     @Test
     void testProductGroupEntityDelete() {
         //Given
         ProductGroupEntity productGroup = new ProductGroupEntity("name", "type");
-        repository.save(productGroup);
+        productGroupRepository.save(productGroup);
 
         //When
         Long id = productGroup.getId();
-        repository.deleteById(id);
+        productGroupRepository.deleteById(id);
 
         //Then
-        Optional<ProductGroupEntity> group = repository.findById(id);
+        Optional<ProductGroupEntity> group = productGroupRepository.findById(id);
         assertFalse(group.isPresent());
     }
 
+    @Test
+    void testProductGroupEntitySaveWithProductEntity() {
+        //Given
+        ProductGroupEntity productGroup = new ProductGroupEntity(GROUP_NAME, GROUP_TYPE);
+        ProductEntity product = new ProductEntity(
+                "name product", "description product", 20.45
+        );
+        ProductEntity product2 = new ProductEntity(
+                "name product2", "description product2", 40.45
+        );
+        productGroup.getProducts().add(product);
+        productGroup.getProducts().add(product2);
+        product.setProductGroupId(productGroup);
+        product2.setProductGroupId(productGroup);
+
+        //When
+        productGroupRepository.save(productGroup);
+        productRepository.save(product);
+        productRepository.save(product2);
+
+        //Then
+        Long productGroupId = productGroup.getId();
+
+        List<ProductEntity> productEntities =
+                productRepository.findByProductGroupId_Id(productGroupId);
+        Optional<ProductGroupEntity> readProductGroup =
+                productGroupRepository.findById(productGroupId);
+
+        assertEquals(2, productEntities.size());
+        assertTrue(readProductGroup.isPresent());
+    }
 }
