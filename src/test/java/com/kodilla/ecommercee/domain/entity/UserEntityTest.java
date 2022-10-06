@@ -20,22 +20,25 @@ class UserEntityTest {
     @Test
     void testCreateUser() {
         //Given
-        UserEntity user = new UserEntity(1L, "test", "test","test","test@test.cm","test","test",LocalDate.now(),1L,1,new ArrayList<>());
+        UserEntity user = new UserEntity(null, "test", "test","test","test@test.cm","test","test",LocalDate.now(),1L,1,new ArrayList<>());
 
         //When
         userRepository.save(user);
 
         //Then
-        Long id = user.getId();
-        Optional<UserEntity> readUser = userRepository.findById(id);
+        Long userId = user.getId();
+        Optional<UserEntity> readUser = userRepository.findById(userId);
         assertTrue(readUser.isPresent());
         assertEquals(user.getFirstName(), readUser.get().getFirstName());
+
+        //Cleanup
+        userRepository.deleteById(userId);
     }
 
     @Test
     void testDeleteUser() {
         //Given
-        UserEntity user = new UserEntity(1L, "test", "test","test","test@test.cm","test","test",LocalDate.now(),1L,1,new ArrayList<>());
+        UserEntity user = new UserEntity(null, "test", "test","test","test@test.cm","test","test",LocalDate.now(),1L,1,new ArrayList<>());
         userRepository.save(user);
 
         //When
@@ -48,16 +51,20 @@ class UserEntityTest {
     @Test
     void testAddingOrdersToUser() {
         //Given
-        UserEntity user = new UserEntity(1L, "test", "test","test","test@test.cm","test","test",LocalDate.now(),1L,1,new ArrayList<>());
+        UserEntity user = new UserEntity(null, "test", "test","test","test@test.cm","test","test",LocalDate.now(),1L,1,new ArrayList<>());
         OrderEntity order1 = new OrderEntity(null, new CartEntity(), new UserEntity(), LocalDate.now(), 200, false, LocalDate.MAX, false, LocalDate.now());
         user.getOrders().add(order1);
 
         //When
         userRepository.save(user);
+        Long userId = user.getId();
         OrderEntity savedOrder = user.getOrders().get(0);
 
         //Then
         assertEquals(1, user.getOrders().size());
         assertEquals(200, savedOrder.getCost());
+
+        //Cleanup
+        userRepository.deleteById(userId);
     }
 }
