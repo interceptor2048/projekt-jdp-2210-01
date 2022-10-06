@@ -28,7 +28,7 @@ public class ProductGroupEntityTest {
         //Given
         ProductGroupEntity productGroup = new ProductGroupEntity(GROUP_NAME, GROUP_TYPE);
 
-        //Wehn
+        //When
         productGroupRepository.save(productGroup);
 
         //Then
@@ -84,12 +84,12 @@ public class ProductGroupEntityTest {
                 "name product", "description product", 20.45
         );
         ProductEntity product2 = new ProductEntity(
-                "name product2", "description product2", 40.45
+                "name product_2", "description product_2", 40.45
         );
         productGroup.getProducts().add(product);
         productGroup.getProducts().add(product2);
-        product.setProductGroupId(productGroup);
-        product2.setProductGroupId(productGroup);
+        product.setProductGroup(productGroup);
+        product2.setProductGroup(productGroup);
 
         //When
         productGroupRepository.save(productGroup);
@@ -100,11 +100,19 @@ public class ProductGroupEntityTest {
         Long productGroupId = productGroup.getId();
 
         List<ProductEntity> productEntities =
-                productRepository.findByProductGroupId_Id(productGroupId);
+                productRepository.findByProductGroup_Id(productGroupId);
+
         Optional<ProductGroupEntity> readProductGroup =
                 productGroupRepository.findById(productGroupId);
 
         assertEquals(2, productEntities.size());
         assertTrue(readProductGroup.isPresent());
+
+        //CleanUp
+        productRepository.deleteAll();
+        //two lines only for testing reference constraints
+        // productRepository.deleteById(product.getId());
+        //productRepository.deleteById(product2.getId());
+        productGroupRepository.deleteById(productGroupId);
     }
 }

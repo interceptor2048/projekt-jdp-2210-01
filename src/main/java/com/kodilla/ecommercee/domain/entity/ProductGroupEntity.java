@@ -27,7 +27,7 @@ public class ProductGroupEntity {
     private String groupType;
 
     @OneToMany(targetEntity = ProductEntity.class,
-                mappedBy = "productGroupId",
+                mappedBy = "productGroup",
                 fetch = FetchType.LAZY
     )
     private List<ProductEntity> products = new ArrayList<>();

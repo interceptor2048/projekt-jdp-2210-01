@@ -34,7 +34,7 @@ public class ProductEntity {
     @ManyToOne
     @JoinColumn(name = "product_group_id")
     @JsonBackReference
-    private ProductGroupEntity productGroupId;
+    private ProductGroupEntity productGroup;
 
     @OneToMany(mappedBy = "productId")
     @JsonManagedReference
