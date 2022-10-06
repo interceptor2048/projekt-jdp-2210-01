@@ -82,7 +82,7 @@ public class OrderEntityRelationTest {
 
         //Given
         CartEntity cartEntity = new CartEntity(null,null,null,LocalDate.now(),LocalDate.now(), LocalDate.now(), 100);
-        UserEntity userEntity = new UserEntity();
+        UserEntity userEntity = new UserEntity(null, "John", "Doe", "NY", "email", "Lol", "password", LocalDate.now(), 1L, 2,new ArrayList<>());
         OrderEntity orderEntity = new OrderEntity(null, cartEntity, userEntity, LocalDate.now(),22,false,LocalDate.now(),false,LocalDate.now());
         cartEntityRepository.save(cartEntity);
         userRepository.save(userEntity);
@@ -93,17 +93,52 @@ public class OrderEntityRelationTest {
         Optional<OrderEntity> order = orderRepository.findById(id);
         assertTrue(order.isPresent());
 
+        //Then
         UserEntity userFromOrder = order.get().getUserId();
         CartEntity cartFromUser = order.get().getCartId();
 
-        assertEquals(userEntity, userFromOrder);
-        assertEquals(cartEntity, cartFromUser);
+        assertEquals("John", userFromOrder.getFirstName());
+        assertEquals(100, cartFromUser.getSumValue());
 
-        //Then
+
         //Cleanup
         orderRepository.deleteById(id);
         userRepository.deleteById(userEntity.getId());
         cartEntityRepository.deleteById(cartEntity.getId());
+    }
+
+    @Test
+    void testOrderEntityRelationDeleteOnlyOrderCheck() {
+
+        //Given
+        CartEntity cartEntity = new CartEntity(null, null, null, LocalDate.now(), LocalDate.now(), LocalDate.now(), 100);
+        UserEntity userEntity = new UserEntity(null, "John", "Doe", "NY", "email", "Lol", "password", LocalDate.now(), 1L, 2, new ArrayList<>());
+        OrderEntity orderEntity = new OrderEntity(null, cartEntity, userEntity, LocalDate.now(), 22, false, LocalDate.now(), false, LocalDate.now());
+        cartEntityRepository.save(cartEntity);
+        userRepository.save(userEntity);
+        orderRepository.save(orderEntity);
+        //When
+
+        long id = orderEntity.getId();
+        long idUser = userEntity.getId();
+        long idCart = cartEntity.getId();
+        Optional<OrderEntity> order = orderRepository.findById(id);
+        assertTrue(order.isPresent());
+
+        orderRepository.deleteById(id);
+
+        Optional<OrderEntity> order1 = orderRepository.findById(id);
+        assertFalse(order1.isPresent());
+        //Then
+        Optional<UserEntity> userTest = userRepository.findById(idUser);
+        Optional<CartEntity> cartTest = cartEntityRepository.findById(idCart);
+        assertTrue(userTest.isPresent());
+        assertTrue(cartTest.isPresent());
+
+        //Cleanup
+        userRepository.deleteById(userEntity.getId());
+        cartEntityRepository.deleteById(cartEntity.getId());
+
     }
 
 }
