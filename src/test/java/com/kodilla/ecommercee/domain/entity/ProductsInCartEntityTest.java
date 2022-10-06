@@ -33,6 +33,26 @@ public class ProductsInCartEntityTest {
         //CleanUp
         productsInCartRepository.deleteById(id);
     }
+    @Test
+    void updateProductInProductsInCartTest() {
+        //Given
+        ProductsInCartEntity productsInCartEntity=new ProductsInCartEntity(null,null,null,20.00,10,200,LocalDate.now());
+        productsInCartRepository.save(productsInCartEntity);
+        //When
+        Long id = productsInCartEntity.getId();
+        Optional<ProductsInCartEntity> readProduct = productsInCartRepository.findById(id);
+        productsInCartEntity=readProduct.get();
+        productsInCartEntity.setProductSumValue(1000);
+        productsInCartRepository.save(productsInCartEntity);
+        //Then
+        id = productsInCartEntity.getId();
+        readProduct = productsInCartRepository.findById(id);
+        assertTrue(readProduct.isPresent());
+        assertEquals(readProduct.get().getProductSumValue(),1000);
+
+        //CleanUp
+        productsInCartRepository.deleteById(id);
+    }
 
     @Test
     void deleteProductToProductsInCartTest() {
