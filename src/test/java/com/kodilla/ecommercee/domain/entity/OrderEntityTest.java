@@ -71,7 +71,8 @@ public class OrderEntityTest {
         assertEquals(2, orderList.size());
 
         //Cleanup
-        orderRepository.deleteAll();
+        orderRepository.deleteById(orderEntity.getId());
+        orderRepository.deleteById(orderEntity1.getId());
 
     }
     @Test
@@ -82,6 +83,7 @@ public class OrderEntityTest {
         orderRepository.save(orderEntity);
         orderRepository.save(orderEntity1);
         long id = orderEntity.getId();
+        long id1 = orderEntity1.getId();
 
         //When
         List<OrderEntity> orderList = orderRepository.findAll();
@@ -92,7 +94,8 @@ public class OrderEntityTest {
         assertEquals(22, findByIdOrder.get().getCost());
 
         //Cleanup
-        orderRepository.deleteAll();
+        orderRepository.deleteById(id);
+        orderRepository.deleteById(id1);
 
     }
     @Test
