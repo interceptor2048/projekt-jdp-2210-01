@@ -19,7 +19,6 @@ public class OrderEntityTest {
     private UserEntity userEntity;
     private CartEntity cartEntity;
 
-
     @Test
     void testOrderEntitySave() {
 
@@ -46,6 +45,7 @@ public class OrderEntityTest {
         orderRepository.save(orderEntity);
         long id = orderEntity.getId();
         Optional<OrderEntity> order = orderRepository.findById(id);
+        assertTrue(order.isPresent());
 
         //Then
         orderRepository.deleteById(orderEntity.getId());
@@ -71,7 +71,8 @@ public class OrderEntityTest {
         assertEquals(2, orderList.size());
 
         //Cleanup
-        orderRepository.deleteAll();
+        orderRepository.deleteById(orderEntity.getId());
+        orderRepository.deleteById(orderEntity1.getId());
 
     }
     @Test
@@ -82,6 +83,7 @@ public class OrderEntityTest {
         orderRepository.save(orderEntity);
         orderRepository.save(orderEntity1);
         long id = orderEntity.getId();
+        long id1 = orderEntity1.getId();
 
         //When
         List<OrderEntity> orderList = orderRepository.findAll();
@@ -92,7 +94,28 @@ public class OrderEntityTest {
         assertEquals(22, findByIdOrder.get().getCost());
 
         //Cleanup
-        orderRepository.deleteAll();
+        orderRepository.deleteById(id);
+        orderRepository.deleteById(id1);
 
+    }
+    @Test
+    void testOrderEntityUpdate() {
+
+        //Given
+        OrderEntity orderEntity = new OrderEntity(null, cartEntity, userEntity, LocalDate.now(),22,false,LocalDate.now(),false,LocalDate.now());
+        orderRepository.save(orderEntity);
+
+        //When
+        long id = orderEntity.getId();
+        orderEntity.setCost(50);
+
+        //Then
+        orderRepository.save(orderEntity);
+        Optional<OrderEntity> order = orderRepository.findById(id);
+        assertTrue(order.isPresent());
+        assertEquals(50, order.get().getCost());
+
+        //Cleanup
+        orderRepository.deleteById(id);
     }
 }
