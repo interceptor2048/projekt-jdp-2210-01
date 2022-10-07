@@ -15,6 +15,8 @@ public interface ProductRepository extends CrudRepository<ProductEntity, Long> {
     @Override
     List<ProductEntity> findAll();
 
+    List<ProductEntity> findByProductGroup_Id(Long id);
+
     @Override
     Optional<ProductEntity> findById(Long id);
 
@@ -23,6 +25,5 @@ public interface ProductRepository extends CrudRepository<ProductEntity, Long> {
 
     @Override
     void deleteById(Long id);
-
 }
 
