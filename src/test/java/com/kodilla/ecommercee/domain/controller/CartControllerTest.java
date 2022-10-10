@@ -52,7 +52,7 @@ public class CartControllerTest {
     @Test
     void createEmptyCartTest() {
         //given
-        CartDto cartDto=new CartDto(null,null,null);
+        CartDto cartDto=new CartDto(null,null);
         //when
         ResponseEntity<Void>entity= cartController.createEmptyCart(cartDto);
         //then
