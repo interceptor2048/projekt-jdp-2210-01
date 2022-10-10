@@ -13,5 +13,8 @@ public interface ProductGroupEntityRepository extends CrudRepository<ProductGrou
 
     List<ProductGroupEntity> findByGroupName(String groupName);
 
+    @Override
+    List<ProductGroupEntity> findAll();
+
     void deleteByGroupName(String groupName);
 }
