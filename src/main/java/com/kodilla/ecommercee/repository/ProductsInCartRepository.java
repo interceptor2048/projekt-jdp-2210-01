@@ -1,6 +1,7 @@
 package com.kodilla.ecommercee.repository;
 
 import com.kodilla.ecommercee.domain.entity.CartEntity;
+import com.kodilla.ecommercee.domain.entity.ProductEntity;
 import com.kodilla.ecommercee.domain.entity.ProductsInCartEntity;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -17,5 +18,9 @@ public interface ProductsInCartRepository extends CrudRepository<ProductsInCartE
     List<ProductsInCartEntity>findAllByCartId(CartEntity cartId);
 
     void deleteAllByCartId(CartEntity cartId);
+
+
+    Optional<ProductsInCartEntity> findProductsInCartEntityByCartIdAndAndProductId(CartEntity cartEntity,ProductEntity productEntity);
+
 }
 
