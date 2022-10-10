@@ -1,6 +1,7 @@
 package com.kodilla.ecommercee.controller;
 
 import com.kodilla.ecommercee.domain.dto.CartDto;
+import com.kodilla.ecommercee.domain.dto.CartResponseDto;
 import com.kodilla.ecommercee.domain.dto.ProductDto;
 import com.kodilla.ecommercee.domain.dto.OrderDto;
 import com.kodilla.ecommercee.domain.entity.CartEntity;
@@ -50,9 +51,9 @@ public class CartController {
     }
 
     @GetMapping(value = "/get_products_from_cart")
-    public ResponseEntity<List<ProductDto>> getProductsFromCart(@RequestParam Long cartId) throws Exception {
+    public ResponseEntity<CartResponseDto> getProductsFromCart(@RequestParam Long cartId) throws Exception {
       List<ProductsInCartEntity> entities=  productsInCartsExternalDbService.getProducts(cartId);
-      return ResponseEntity.ok(productsInCartMapper.mapProductInCartToProductDtoList(entities));
+      return ResponseEntity.ok(cartMapper.mapProductsDtoListToCart(productsInCartMapper.mapProductInCartToProductDtoList(entities)));
     }
 
     @PostMapping(value = "/add_product")

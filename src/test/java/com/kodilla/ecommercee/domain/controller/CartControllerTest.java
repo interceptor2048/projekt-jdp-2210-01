@@ -2,6 +2,7 @@ package com.kodilla.ecommercee.domain.controller;
 
 import com.kodilla.ecommercee.controller.CartController;
 import com.kodilla.ecommercee.domain.dto.CartDto;
+import com.kodilla.ecommercee.domain.dto.CartResponseDto;
 import com.kodilla.ecommercee.domain.dto.OrderDto;
 import com.kodilla.ecommercee.domain.dto.ProductDto;
 import com.kodilla.ecommercee.domain.entity.CartEntity;
@@ -17,7 +18,7 @@ import org.springframework.http.ResponseEntity;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
+
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -103,10 +104,10 @@ public class CartControllerTest {
         cartController.addProductToCart(productEntity2.getId(),cartEntity.getId(),10);
         cartController.addProductToCart(productEntity3.getId(),cartEntity.getId(),10);
         //when
-        ResponseEntity<List<ProductDto>> entity=cartController.getProductsFromCart(cartEntity.getId());
+        ResponseEntity<CartResponseDto> entity=cartController.getProductsFromCart(cartEntity.getId());
         //then
         assertEquals(200,entity.getStatusCode().value());
-        assertEquals(3,entity.getBody().size());
+        assertEquals(3,entity.getBody().getProductsInCart().size());
         //cleanup
         productsInCartRepository.deleteAll();
         cartEntityRepository.deleteAll();
@@ -134,10 +135,10 @@ public class CartControllerTest {
         cartController.addProductToCart(productEntity3.getId(),cartEntity.getId(),10);
         //when
         ResponseEntity<Void> entity=  cartController.removeProductFromCart(productEntity1.getId(),cartEntity.getId());
-        ResponseEntity<List<ProductDto>> entities=cartController.getProductsFromCart(cartEntity.getId());
+        ResponseEntity<CartResponseDto> entities=cartController.getProductsFromCart(cartEntity.getId());
         //then
         assertEquals(200,entity.getStatusCode().value());
-        assertEquals(2,entities.getBody().size());
+        assertEquals(2,entities.getBody().getProductsInCart().size());
         //cleanup
         productsInCartRepository.deleteAll();
         cartEntityRepository.deleteAll();
