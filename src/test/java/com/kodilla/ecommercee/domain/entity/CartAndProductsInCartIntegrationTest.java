@@ -1,21 +1,27 @@
 package com.kodilla.ecommercee.domain.entity;
 import com.kodilla.ecommercee.repository.CartEntityRepository;
+import com.kodilla.ecommercee.repository.ProductRepository;
 import com.kodilla.ecommercee.repository.ProductsInCartRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
+@Transactional
 //actual DB structure
-public class CartAndProductsInCartIntegrationTests {
+public class CartAndProductsInCartIntegrationTest {
     @Autowired
     CartEntityRepository cartEntityRepository;
+    @Autowired
+    ProductRepository productRepository;
     @Autowired
     ProductsInCartRepository productsInCartRepository;
 
@@ -82,4 +88,19 @@ public class CartAndProductsInCartIntegrationTests {
         productsInCartRepository.deleteAll();
         cartEntityRepository.deleteAll();
     }
+   @Test
+   void  findProductsInCartEntityByCartIdAndAndProductIdTest(){
+        //given
+       CartEntity cartEntity =new CartEntity(null,null,null, LocalDate.now(),LocalDate.now(),null,0.00);
+       cartEntityRepository.save(cartEntity);
+       ProductEntity productEntity=new ProductEntity(null,"test name","test description",54.0,null,null);
+       productRepository.save(productEntity);
+       ProductsInCartEntity productsInCartEntity=new ProductsInCartEntity(null,cartEntity,productEntity,productEntity.getPrice(),10,productEntity.getPrice()*10,LocalDate.now());
+       productsInCartRepository.save(productsInCartEntity);
+       //when
+        Optional<ProductsInCartEntity> entity=  productsInCartRepository.findProductsInCartEntityByCartIdAndAndProductId(cartEntity,productEntity);
+        //then
+        assertEquals(entity.get().getProductQuantity(),10);
+   }
+
 }
