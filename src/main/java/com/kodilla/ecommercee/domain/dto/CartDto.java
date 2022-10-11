@@ -9,6 +9,5 @@ import java.util.List;
 @AllArgsConstructor
 public class CartDto {
     private Long id;
-   // private Long userId;
     private List<ProductDto> productsInCart;
 }
