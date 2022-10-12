@@ -1,7 +1,7 @@
 package com.kodilla.ecommercee.service;
 
 
-import com.kodilla.ecommercee.GroupNotFoundException;
+import com.kodilla.ecommercee.errorhandlers.GroupNotFoundException;
 import com.kodilla.ecommercee.domain.entity.ProductGroupEntity;
 import com.kodilla.ecommercee.repository.ProductGroupEntityRepository;
 import lombok.RequiredArgsConstructor;
