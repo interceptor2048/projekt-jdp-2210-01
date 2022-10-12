@@ -18,4 +18,10 @@ public class GlobalHttpErrorHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<Object> handleCartOrProductNotFoundException(CartOrProductNotFoundException exception){
         return new ResponseEntity<>("Cart or product with given id's does not exist", HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(GroupNotFoundException.class)
+    public ResponseEntity<Object> handleCartOrProductNotFoundException(GroupNotFoundException exception) {
+        return new ResponseEntity<>("Group with given id's does not exist", HttpStatus.BAD_REQUEST);
+    }
+
 }
