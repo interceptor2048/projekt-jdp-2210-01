@@ -1,18 +1,13 @@
 package com.kodilla.ecommercee.service;
 
-import com.kodilla.ecommercee.domain.dto.ProductsInCartDto;
+
 import com.kodilla.ecommercee.domain.entity.CartEntity;
 import com.kodilla.ecommercee.domain.entity.ProductEntity;
 import com.kodilla.ecommercee.domain.entity.ProductsInCartEntity;
-import com.kodilla.ecommercee.errorhandlers.CartNotFoundException;
-import com.kodilla.ecommercee.mapper.ProductsInCartMapper;
 import com.kodilla.ecommercee.repository.ProductRepository;
-import com.kodilla.ecommercee.service.CartDbService;
-import com.kodilla.ecommercee.service.ProductsInCartInternalDbService;
 import lombok.AllArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.*;
+
 
 import java.time.LocalDate;
 import java.util.List;
