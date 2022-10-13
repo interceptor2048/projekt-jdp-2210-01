@@ -42,7 +42,7 @@ public class ProductsInCartsExternalDbServiceTest {
         assertEquals(output.getProductPrice(),5.5);
         assertEquals(output.getProductSumValue(),55);
         //cleanup
-        productsInCartRepository.deleteAll();;
+        productsInCartRepository.deleteAll();
         cartEntityRepository.deleteAll();
         productRepository.deleteAll();
     }
@@ -60,7 +60,7 @@ public class ProductsInCartsExternalDbServiceTest {
         //then
         assertEquals(output.getProductQuantity(),1);
         //cleanup
-        productsInCartRepository.deleteAll();;
+        productsInCartRepository.deleteAll();
         cartEntityRepository.deleteAll();
         productRepository.deleteAll();
     }
@@ -84,7 +84,7 @@ public class ProductsInCartsExternalDbServiceTest {
         //then
         assertEquals(output.size(),3);
         //cleanup
-        productsInCartRepository.deleteAll();;
+        productsInCartRepository.deleteAll();
         cartEntityRepository.deleteAll();
         productRepository.deleteAll();
     }
@@ -106,7 +106,7 @@ public class ProductsInCartsExternalDbServiceTest {
 
         assertTrue(products.isEmpty());
         //cleanup
-        productsInCartRepository.deleteAll();;
+        productsInCartRepository.deleteAll();
         cartEntityRepository.deleteAll();
         productRepository.deleteAll();
     }

@@ -8,22 +8,18 @@ import com.kodilla.ecommercee.domain.entity.CartEntity;
 import com.kodilla.ecommercee.domain.entity.OrderEntity;
 import com.kodilla.ecommercee.domain.entity.ProductsInCartEntity;
 import com.kodilla.ecommercee.domain.entity.UserEntity;
-import com.kodilla.ecommercee.errorhandlers.CartNotFoundException;
 import com.kodilla.ecommercee.mapper.CartMapper;
 import com.kodilla.ecommercee.mapper.ProductsInCartMapper;
 import com.kodilla.ecommercee.repository.OrderRepository;
 import com.kodilla.ecommercee.repository.UserRepository;
 import com.kodilla.ecommercee.service.CartDbService;
 import com.kodilla.ecommercee.service.ProductsInCartsExternalDbService;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
