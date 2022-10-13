@@ -25,7 +25,7 @@ public class OrderEntity {
     @ManyToOne
     @JoinColumn(name = "order_user_id", referencedColumnName = "user_id")
     @JsonBackReference
-    private UserEntity userId;
+    private UserEntity user;
 
     @Column(name="order_creation_date")
     private LocalDate creationDate;
