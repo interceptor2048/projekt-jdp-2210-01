@@ -21,7 +21,7 @@ public class OrderController {
 
     @GetMapping(value = "{orderId}")
     public ResponseEntity<OrderDto> getOrder(@PathVariable Long orderId) {
-        return ResponseEntity.ok(new OrderDto(1L,1L, 1L, LocalDate.now(),false,false));
+        return ResponseEntity.ok(new OrderDto(1L,1L, 1L, LocalDate.now(), 30.0, false, LocalDate.now(), false, LocalDate.now()));
     }
 
     @DeleteMapping(value = "{orderId}")
@@ -30,7 +30,7 @@ public class OrderController {
     }
     @PutMapping(value = "{orderId}")
     public ResponseEntity<OrderDto> updateOrder(@RequestBody OrderDto orderDto) {
-        return ResponseEntity.ok((new OrderDto(1L, 1L, 1L, LocalDate.now(), true, false)));
+        return ResponseEntity.ok(new OrderDto(1L,1L, 1L, LocalDate.now(), 30.0, false, LocalDate.now(), false, LocalDate.now()));
     }
     @PostMapping
     public ResponseEntity<Void> createOrder(@RequestBody OrderDto orderDto){
