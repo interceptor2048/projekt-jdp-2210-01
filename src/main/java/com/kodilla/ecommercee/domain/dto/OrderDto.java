@@ -14,6 +14,9 @@ public class OrderDto {
     private Long cartId;
     private Long userId;
     private LocalDate orderCreationDate;
+    private Double orderCost;
     private boolean orderIsClosed;
+    private LocalDate orderClosingDate;
     private boolean orderIsDelivered;
+    private LocalDate orderDeliveryDate;
 }
