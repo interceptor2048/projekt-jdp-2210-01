@@ -17,7 +17,8 @@ public class GroupMapper {
     }
 
     public ProductGroupEntity mapToGroup(final GroupCreateDto groupCreateDto) {
-        return new ProductGroupEntity(groupCreateDto.getId(), groupCreateDto.getName(), groupCreateDto.getGroupType(), new ArrayList<>());
+        return new ProductGroupEntity(groupCreateDto.getId(),
+                groupCreateDto.getName(), groupCreateDto.getGroupType(), new ArrayList<>());
     }
 
     public List<ProductGroupDto> mapToGroupsListDto(final List<ProductGroupEntity> groupsList) {

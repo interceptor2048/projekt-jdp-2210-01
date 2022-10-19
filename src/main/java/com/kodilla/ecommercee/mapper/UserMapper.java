@@ -1,12 +1,14 @@
 package com.kodilla.ecommercee.mapper;
 
 import com.kodilla.ecommercee.domain.dto.UserDto;
+import com.kodilla.ecommercee.domain.dto.UserInputDto;
 import com.kodilla.ecommercee.domain.entity.UserEntity;
 import com.kodilla.ecommercee.errorhandlers.UserNotFoundException;
 import com.kodilla.ecommercee.service.UserDbService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,8 +27,25 @@ public class UserMapper {
                 userEntity.getEmail(),
                 userEntity.getLogin(),
                 userEntity.getPassword(),
+                userEntity.getCreationDate(),
                 (long) userEntity.getStatus(),
-                userEntity.getStatus()
+                userEntity.getStatus(),
+                new ArrayList<>()
+        );
+    }
+
+    public UserEntity mapToUserEntity(final UserInputDto userDto) {
+        return new UserEntity(userDto.getId(),
+                userDto.getFirstName(),
+                userDto.getLastName(),
+                userDto.getAddress(),
+                userDto.getEmail(),
+                userDto.getLogin(),
+                userDto.getPassword(),
+                userDto.getCreationDate(),
+                (long) userDto.getStatus(),
+                userDto.getStatus(),
+                new ArrayList<>()
         );
     }
 

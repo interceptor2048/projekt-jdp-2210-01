@@ -15,5 +15,4 @@ public interface UserRepository extends CrudRepository<UserEntity, Long> {
     @Override
     List<UserEntity> findAll();
 
-    void deleteById(Long id);
 }
