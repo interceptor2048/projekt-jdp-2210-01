@@ -74,6 +74,7 @@ public class CartController {
         productsInCartsExternalDbService.calculateCartSum(cartId), true,LocalDate.now(),false,null);
         orderRepository.save(orderEntity);
         //zamienic na service jak się pojawi////
-        return ResponseEntity.ok(new OrderDto(orderEntity.getId(), orderEntity.getCartId().getId(), orderEntity.getUserId().getId(), LocalDate.now(), true, false));
+        return ResponseEntity.ok(new OrderDto(orderEntity.getId(), orderEntity.getCartId().getId(), orderEntity.getUserId().getId(),
+                LocalDate.now(), 30.0, true, LocalDate.now(), false, LocalDate.now()));
     }
 }
