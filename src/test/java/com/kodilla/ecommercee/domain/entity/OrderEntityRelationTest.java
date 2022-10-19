@@ -94,7 +94,7 @@ public class OrderEntityRelationTest {
         assertTrue(order.isPresent());
 
         //Then
-        UserEntity userFromOrder = order.get().getUserId();
+        UserEntity userFromOrder = order.get().getUser();
         CartEntity cartFromUser = order.get().getCartId();
 
         assertEquals("John", userFromOrder.getFirstName());

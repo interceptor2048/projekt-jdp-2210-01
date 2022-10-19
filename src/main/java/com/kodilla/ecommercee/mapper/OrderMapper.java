@@ -50,7 +50,7 @@ public class OrderMapper {
         return new OrderDto(
                 order.getId(),
                 order.getCartId().getId(),
-                order.getUserId().getId(),
+                order.getUser().getId(),
                 order.getCreationDate(),
                 order.getCost(),
                 order.isClosed(),
